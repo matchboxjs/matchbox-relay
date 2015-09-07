@@ -1,0 +1,32 @@
+{
+  "name": "matchbox-relay",
+  "version": "0.1.0",
+  "description": "Event propagation network for decoupled components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matchboxjs/matchbox-relay.git"
+  },
+  "keywords": [
+    "matchbox",
+    "event",
+    "component",
+    "network"
+  ],
+  "author": "tunderdomb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matchboxjs/matchbox-relay/issues"
+  },
+  "homepage": "https://github.com/matchboxjs/matchbox-relay#readme",
+  "dependencies": {
+    "matchbox-collections": "matchboxjs/matchbox-collections",
+    "matchbox-core": "matchboxjs/matchbox-core",
+    "matchbox-internals": "matchboxjs/matchbox-internals",
+    "matchbox-radio": "matchboxjs/matchbox-radio",
+    "matchbox-util": "matchboxjs/matchbox-util"
+  }
+}
