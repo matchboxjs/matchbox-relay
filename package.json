@@ -1,10 +1,13 @@
 {
   "name": "matchbox-relay",
-  "version": "0.1.0",
-  "description": "Event propagation network for decoupled components",
+  "version": "0.2.0",
+  "description": "Intent relay network solution",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "directories": {
+    "test": "test"
   },
   "repository": {
     "type": "git",
@@ -12,8 +15,8 @@
   },
   "keywords": [
     "matchbox",
-    "event",
-    "component",
+    "intent",
+    "relay",
     "network"
   ],
   "author": "tunderdomb",
@@ -23,10 +26,12 @@
   },
   "homepage": "https://github.com/matchboxjs/matchbox-relay#readme",
   "dependencies": {
-    "matchbox-collections": "matchboxjs/matchbox-collections",
-    "matchbox-core": "matchboxjs/matchbox-core",
-    "matchbox-internals": "matchboxjs/matchbox-internals",
-    "matchbox-radio": "matchboxjs/matchbox-radio",
-    "matchbox-util": "matchboxjs/matchbox-util"
+    "matchbox-factory": "^0.2.0",
+    "matchbox-radio": "^1.0.0",
+    "matchbox-util": "^0.4.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3"
   }
 }
