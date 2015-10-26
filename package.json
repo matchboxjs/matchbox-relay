@@ -1,7 +1,7 @@
 {
   "name": "matchbox-relay",
   "version": "0.3.0",
-  "description": "Intent relay network solution",
+  "description": "Promise based Comm-relay network",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
