@@ -6,7 +6,7 @@ module.exports = Intent
 function Intent(data) {
   this.data = data
   this.interrupted = false
-  this.direction = "capture" // "bubble" | "neighbour"
+  this.direction = "capture" // "bubble"
 }
 
 inherit(Intent, Radio)

@@ -1,6 +1,6 @@
 {
   "name": "matchbox-relay",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Intent relay network solution",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.0",
+    "es6-promise": "^3.0.2",
     "mocha": "^2.3.3"
   }
 }

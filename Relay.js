@@ -25,9 +25,11 @@ define.getter(Relay.prototype, "root", function () {
 Relay.prototype.activate = function () {
   this.active = true
 }
+
 Relay.prototype.deactivate = function () {
   this.active = false
 }
+
 Relay.prototype.isConnectionAllowed = function (relay, behaviour) {
   if (!(relay instanceof Relay)) {
     // Not a Relay
@@ -48,9 +50,11 @@ Relay.prototype.isConnectionAllowed = function (relay, behaviour) {
   }
   return true
 }
+
 Relay.prototype.isConnectedTo = function (relay) {
   return !!~this._connections.indexOf(relay)
 }
+
 Relay.prototype.connect = function (relay) {
   if (!this.isConnectionAllowed(relay)) {
     return null
@@ -61,14 +65,25 @@ Relay.prototype.connect = function (relay) {
 
   return relay
 }
-Relay.prototype.intent = function (name, handler) {
-  var filters = this._intents[name]
-  if (!filters) {
-    filters = this._intents[name] = []
+
+Relay.prototype.disconnect = function (relay) {
+  if (relay.parent == this) {
+    relay.parent = null
+    var i = this._connections.indexOf(relay)
+    if (~i) this._connections.splice(relay, i, 1)
   }
-  filters.push(handler)
+  return relay
+}
+
+Relay.prototype.receive = function (name, handler) {
+  var handlers = this._intents[name]
+  if (!handlers) {
+    handlers = this._intents[name] = []
+  }
+  handlers.push(handler)
   return this
 }
+
 Relay.prototype.transmit = function (name, data) {
   var intent = data instanceof Intent ? data : new Intent(data)
   var promise = Promise.resolve(intent)
@@ -76,6 +91,7 @@ Relay.prototype.transmit = function (name, data) {
 
   switch (intent.direction) {
     case "bubble":
+      handle(this)
       var parent = this.parent
       while (parent) {
         handle(parent)
@@ -89,7 +105,7 @@ Relay.prototype.transmit = function (name, data) {
 
   function handle (relay) {
     var handlers = relay._intents[name]
-    if (!Array.isArray(handlers)) {
+    if (!Array.isArray(handlers) || !handlers.length) {
       return
     }
 
@@ -106,15 +122,16 @@ Relay.prototype.transmit = function (name, data) {
     promise = Promise.all(handlers)
   }
 
-  promise.catch(function (err) {
+  return promise.then(function () {
+    return intent
+  }).catch(function (err) {
     if (err === interruption) {
       return intent
     }
     throw err
   })
-
-  return promise
 }
+
 Relay.prototype.walk = function (cb) {
   var relay = this
 
